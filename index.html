@@ -1097,11 +1097,11 @@
                 Haz crecer tu capital con <span class="highlight">estrategia y respaldo profesional</span>
             </h1>
             <p>
-                En GUB Servicios de Intermediación conectamos tu inversión con los mercados globales. Rendimientos del 8% al 14% anual, riesgo controlado, y resultados desde el primer semestre.
+                En GUB Servicios de Intermediación conectamos tu inversión con los mercados globales. Rendimientos del 14% anual, riesgo controlado, y resultados desde el primer semestre.
             </p>
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <div class="number">8-14%</div>
+                    <div class="number">14%</div>
                     <div class="label">Tasa Anual</div>
                 </div>
                 <div class="hero-stat">
@@ -1239,8 +1239,8 @@
         </div>
         <div class="benefit-card animate-on-scroll">
             <div class="benefit-icon">📈</div>
-            <h4>Tasa del 8% al 14% anual</h4>
-            <p>Tasas de interés competitivas respaldadas por estrategias activas en mercados internacionales.</p>
+            <h4>Tasa del 14% anual</h4>
+            <p>Tasa de interés competitiva respaldada por estrategias activas en mercados internacionales.</p>
         </div>
         <div class="benefit-card animate-on-scroll">
             <div class="benefit-icon">🛡️</div>
@@ -1290,11 +1290,8 @@
             </div>
             <div class="sim-input-group">
                 <label>Tasa de interés anual</label>
-                <div class="sim-rate-options">
-                    <button class="rate-btn" data-rate="8" onclick="selectRate(8)">8%</button>
-                    <button class="rate-btn" data-rate="10" onclick="selectRate(10)">10%</button>
-                    <button class="rate-btn active" data-rate="12" onclick="selectRate(12)">12%</button>
-                    <button class="rate-btn" data-rate="14" onclick="selectRate(14)">14%</button>
+                <div class="sim-rate-options" style="grid-template-columns: 1fr;">
+                    <button class="rate-btn active" data-rate="14" onclick="selectRate(14)" style="font-size:1.2rem; padding:16px;">14% Anual</button>
                 </div>
             </div>
             <div class="sim-results">
@@ -1414,7 +1411,7 @@
                 <div class="big-label">meses para tu primer rendimiento</div>
                 <div class="why-mini-stats">
                     <div class="why-mini-stat">
-                        <div class="val">8-14%</div>
+                        <div class="val">14%</div>
                         <div class="lbl">Tasa anual</div>
                     </div>
                     <div class="why-mini-stat">
@@ -1546,7 +1543,7 @@
     const termRange = document.getElementById('termRange');
     const amountDisplay = document.getElementById('amountDisplay');
     const termDisplay = document.getElementById('termDisplay');
-    let selectedRate = 12;
+    let selectedRate = 14;
 
     function selectRate(rate) {
         selectedRate = rate;
