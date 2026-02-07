@@ -352,10 +352,30 @@
                 </tbody>
             </table>
         </div>
+        <!-- Leads from landing page -->
+        <div class="toolbar" style="margin-top: 40px;">
+            <h2>Prospectos (Landing Page)</h2>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Capital Estimado</th>
+                        <th>Experiencia</th>
+                        <th>País</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody id="leadsTable">
+                    <tr><td colspan="7"><div class="empty-state"><div class="emoji">📥</div><p>No hay prospectos registrados aún.</p></div></td></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-
-<!-- ===== MODAL: Add/Edit Client ===== -->
 <div class="modal-overlay" id="clientModal">
     <div class="modal">
         <h3 id="modalTitle">Nuevo Cliente</h3>
@@ -471,6 +491,7 @@
             if (adminDoc.exists) {
                 showDashboard();
                 loadClients();
+                loadLeads();
             } else {
                 alert('No tienes permisos de administrador.');
                 auth.signOut();
@@ -507,6 +528,7 @@
                     });
                     showDashboard();
                     loadClients();
+                    loadLeads();
                 } else {
                     error.textContent = 'No tienes permisos de administrador.';
                     error.style.display = 'block';
@@ -528,6 +550,7 @@
                         });
                         showDashboard();
                         loadClients();
+                        loadLeads();
                         return;
                     }
                 } catch(e2) { console.error(e2); }
@@ -719,6 +742,39 @@
         btn.textContent = 'Guardar Cliente';
         btn.disabled = false;
     });
+
+    // ===== LOAD LEADS =====
+    async function loadLeads() {
+        try {
+            const snapshot = await db.collection('leads').orderBy('createdAt', 'desc').get();
+            const tbody = document.getElementById('leadsTable');
+
+            if (snapshot.empty) {
+                tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="emoji">📥</div><p>No hay prospectos registrados aún.</p></div></td></tr>`;
+                return;
+            }
+
+            let html = '';
+            snapshot.forEach(doc => {
+                const l = doc.data();
+                const date = l.createdAt ? l.createdAt.toDate().toLocaleDateString('es-MX') : '—';
+                html += `
+                    <tr>
+                        <td style="color:var(--text-white);font-weight:600;">${l.firstName} ${l.lastName}</td>
+                        <td>${l.email}</td>
+                        <td>${l.phone || '—'}</td>
+                        <td style="color:var(--blue);font-weight:600;">${l.capital || '—'}</td>
+                        <td>${l.experience || '—'}</td>
+                        <td>${l.country || '—'}</td>
+                        <td>${date}</td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        } catch (err) {
+            console.error('Error loading leads:', err);
+        }
+    }
 </script>
 </body>
 </html>
